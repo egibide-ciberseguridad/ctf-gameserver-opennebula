@@ -1,8 +1,8 @@
 services:
   terraform-ansible:
     build:
-      context: ./docker/terraform
-      dockerfile: Dockerfile
+      context: ./docker
+      dockerfile: terraform/Dockerfile
       args:
         - TERRAFORM_VERSION=${TERRAFORM_VERSION}
     environment:
