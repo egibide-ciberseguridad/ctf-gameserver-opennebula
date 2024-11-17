@@ -5,6 +5,7 @@ services:
       dockerfile: terraform/Dockerfile
       args:
         - TERRAFORM_VERSION=${TERRAFORM_VERSION}
+    hostname: terraform-ansible
     environment:
       - TF_VAR_SSH_PUBLIC_KEY=${SSH_PUBLIC_KEY}
     volumes:
