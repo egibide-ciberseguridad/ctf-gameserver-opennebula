@@ -8,7 +8,7 @@ data "opennebula_virtual_network" "network" {
   name = local.opennebula.vm.network
 }
 
-resource "opennebula_virtual_machine" "master" {
+resource "opennebula_virtual_machine" "gameserver" {
 
   depends_on = [
     opennebula_virtual_machine.haproxy
@@ -18,9 +18,9 @@ resource "opennebula_virtual_machine" "master" {
 
   name = "ctf-gameserver"
 
-  cpu    = local.opennebula.limits.master.cpu
-  vcpu   = local.opennebula.limits.master.vcpu
-  memory = local.opennebula.limits.master.memory
+  cpu    = local.opennebula.limits.gameserver.cpu
+  vcpu   = local.opennebula.limits.gameserver.vcpu
+  memory = local.opennebula.limits.gameserver.memory
 
   lock = local.opennebula.vm.locked ? "USE" : "UNLOCK"
 
@@ -43,18 +43,18 @@ resource "opennebula_virtual_machine" "master" {
   disk {
     image_id = data.opennebula_template.template.disk[0].image_id
     target   = "vda"
-    size     = local.opennebula.limits.master.disk
+    size     = local.opennebula.limits.gameserver.disk
   }
 }
 
-resource "null_resource" "hosts_master" {
+resource "null_resource" "hosts_gameserver" {
   depends_on = [
-    opennebula_virtual_machine.master
+    opennebula_virtual_machine.gameserver
   ]
 
   provisioner "file" {
     connection {
-      host         = local.master.name
+      host         = local.gameserver.name
       user         = "root"
       private_key  = file("~/.ssh/id_rsa")
       bastion_host = local.haproxy.connection_ip
@@ -65,9 +65,9 @@ resource "null_resource" "hosts_master" {
   }
 }
 
-resource "null_resource" "ansible_master" {
+resource "null_resource" "ansible_gameserver" {
   depends_on = [
-    null_resource.hosts_master
+    null_resource.hosts_gameserver
   ]
 
   provisioner "local-exec" {
@@ -76,10 +76,10 @@ resource "null_resource" "ansible_master" {
       ANSIBLE_HOST_KEY_CHECKING=False \
       ANSIBLE_FORCE_COLOR=True \
       ansible-playbook \
-        -i "${local.master.name}," \
+        -i "${local.gameserver.name}," \
         --ssh-common-args '-o ProxyCommand="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 22 -W %h:%p -q root@${local.haproxy.connection_ip}"' \
         --extra-vars "haproxy_connection_ip=${local.haproxy.connection_ip}" \
-        --extra-vars "node_ip=${local.master.private_ip}" \
+        --extra-vars "node_ip=${local.gameserver.private_ip}" \
         /ansible/common-playbook.yml
     EOT
   }
@@ -90,27 +90,27 @@ resource "null_resource" "ansible_master" {
       ANSIBLE_HOST_KEY_CHECKING=False \
       ANSIBLE_FORCE_COLOR=True \
       ansible-playbook \
-        -i "${local.master.name}," \
+        -i "${local.gameserver.name}," \
         --ssh-common-args '-o ProxyCommand="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 22 -W %h:%p -q root@${local.haproxy.connection_ip}"' \
         --extra-vars "haproxy_connection_ip=${local.haproxy.connection_ip}" \
-        --extra-vars "node_ip=${local.master.private_ip}" \
+        --extra-vars "node_ip=${local.gameserver.private_ip}" \
         --extra-vars "haproxy_ip=${local.haproxy.private_ip}" \
-        /ansible/master-playbook.yml
+        /ansible/gameserver-playbook.yml
     EOT
   }
 }
 
 locals {
-  master = {
-    name          = opennebula_virtual_machine.master.name
-    private_ip    = opennebula_virtual_machine.master.nic[0].computed_ip
-    public_ip     = lookup(local.ip_publica, opennebula_virtual_machine.master.nic[0].computed_ip, "")
+  gameserver = {
+    name          = opennebula_virtual_machine.gameserver.name
+    private_ip    = opennebula_virtual_machine.gameserver.nic[0].computed_ip
+    public_ip     = lookup(local.ip_publica, opennebula_virtual_machine.gameserver.nic[0].computed_ip, "")
     connection_ip = (local.ansible.connect_to_public_ip ?
-      lookup(local.ip_publica, opennebula_virtual_machine.master.nic[0].computed_ip, "") :
-      opennebula_virtual_machine.master.nic[0].computed_ip)
+      lookup(local.ip_publica, opennebula_virtual_machine.gameserver.nic[0].computed_ip, "") :
+      opennebula_virtual_machine.gameserver.nic[0].computed_ip)
   }
 }
 
-output "master" {
-  value = local.master
+output "gameserver" {
+  value = local.gameserver
 }

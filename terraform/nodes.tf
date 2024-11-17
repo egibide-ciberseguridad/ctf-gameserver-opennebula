@@ -5,7 +5,7 @@ data "opennebula_image" "empty_image" {
 resource "opennebula_virtual_machine" "nodes" {
 
   depends_on = [
-    opennebula_virtual_machine.master
+    opennebula_virtual_machine.gameserver
   ]
 
   count = var.nodes

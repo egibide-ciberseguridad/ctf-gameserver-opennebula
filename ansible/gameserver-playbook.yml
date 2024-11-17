@@ -10,7 +10,7 @@
     - group_by: key=reachable
       when: ping_result is success
 
-- name: Configurar el master
+- name: Configurar el gameserver
   hosts: reachable
   vars:
     ansible_python_interpreter: auto_silent

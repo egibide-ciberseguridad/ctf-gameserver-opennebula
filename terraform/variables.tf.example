@@ -11,7 +11,7 @@ locals {
       locked  = false
     }
     limits = {
-      master = {
+      gameserver = {
         cpu    = 2
         vcpu   = 4
         memory = 4096
