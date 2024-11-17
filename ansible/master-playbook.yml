@@ -22,5 +22,5 @@
     # Actualizar el sistema
     #- import_tasks: upgrade-tasks.yml
 
-    # Instalar Docker
-    #- import_tasks: docker-tasks.yml
+    # Instalar el CTF Gameserver
+    - import_tasks: ctf-gameserver-tasks.yml
