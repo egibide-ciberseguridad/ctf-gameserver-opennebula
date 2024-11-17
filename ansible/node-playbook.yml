@@ -16,9 +16,11 @@
     ansible_python_interpreter: auto_silent
   gather_facts: yes
   become: true
+  vars_files:
+    - versiones.yml
   tasks:
     # Actualizar el sistema
-    - import_tasks: upgrade-tasks.yml
+    #- import_tasks: upgrade-tasks.yml
 
     # Instalar Docker
-    - import_tasks: docker-tasks.yml
+    #- import_tasks: docker-tasks.yml

@@ -93,7 +93,6 @@ resource "null_resource" "ansible_nodes_common" {
 
 resource "null_resource" "ansible_nodes" {
   depends_on = [
-    null_resource.ansible_master,
     null_resource.ansible_nodes_common,
   ]
 

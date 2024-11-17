@@ -53,7 +53,6 @@ resource "null_resource" "hosts_haproxy" {
 resource "null_resource" "ansible_haproxy" {
   depends_on = [
     null_resource.hosts_haproxy,
-    null_resource.ansible_master
   ]
 
   provisioner "local-exec" {
