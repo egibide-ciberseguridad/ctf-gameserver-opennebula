@@ -12,7 +12,7 @@ resource "opennebula_virtual_machine" "nodes" {
 
   template_id = data.opennebula_template.template.id
 
-  name = "ctf-t${count.index+1}"
+  name = "ctf-team-${count.index+1}"
 
   cpu    = local.opennebula.limits.nodes.cpu
   vcpu   = local.opennebula.limits.nodes.vcpu

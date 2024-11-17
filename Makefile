@@ -15,7 +15,7 @@ help: _header
 	@echo init / plan / apply / show / output / destroy
 	@echo -----------------------------------------------------
 	@echo workspace
-	@echo ssh [node=ctf-t0]
+	@echo ssh [node=ctf-team-1]
 	@echo -----------------------------------------------------
 	@echo clean / clean-tfstate
 	@echo nuke-apply
