@@ -2,7 +2,7 @@ resource "opennebula_virtual_machine" "haproxy" {
 
   template_id = data.opennebula_template.template.id
 
-  name = "ctf-manager"
+  name = "ctf-haproxy"
 
   cpu    = local.opennebula.limits.haproxy.cpu
   vcpu   = local.opennebula.limits.haproxy.vcpu

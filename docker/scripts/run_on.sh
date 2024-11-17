@@ -8,7 +8,7 @@ HAPROXY_IP=$(terraform -chdir=/terraform output --json haproxy | jq -r .connecti
 case $TIPO_NODO in
 gameserver) DIRECCION=$(terraform -chdir=/terraform output --json master | jq -r .name) ;;
 team) DIRECCION=$(terraform -chdir=/terraform output --json nodes | jq -r .[$NUM_NODO-1].name) ;;
-manager) DIRECCION=$(terraform -chdir=/terraform output --json haproxy | jq -r .name) ;;
+haproxy) DIRECCION=$(terraform -chdir=/terraform output --json haproxy | jq -r .name) ;;
 esac
 
 
