@@ -1,0 +1,48 @@
+locals {
+  opennebula = {
+    connection = {
+      username = "ciber-xx"
+      group    = "ciber-xx"
+      token    = "4b8cf5....................................................c1cb11"
+    }
+    vm = {
+      tag     = "debian-terraform"
+      network = "ciber-xx"
+      locked  = false
+    }
+    limits = {
+      master = {
+        cpu    = 2
+        vcpu   = 4
+        memory = 4096
+        disk   = 16384
+      }
+      nodes = {
+        cpu    = 1
+        vcpu   = 2
+        memory = 3072
+        disk1  = 16384
+        disk2  = 8192
+      }
+      haproxy = {
+        cpu    = 1
+        vcpu   = 2
+        memory = 1024
+        disk   = 8192
+      }
+    }
+  }
+  ansible = {
+    connect_to_public_ip = false
+  }
+}
+
+variable "nodes" {
+  description = "Número de nodos worker del cluster"
+  default     = 3
+}
+
+variable "SSH_PUBLIC_KEY" {
+  type        = string
+  description = "Clave pública del usuario para inyectar en las máquinas OpenNebula"
+}
