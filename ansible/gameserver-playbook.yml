@@ -18,9 +18,30 @@
   become: true
   vars_files:
     - versiones.yml
+    - gameserver-variables.yml
   tasks:
     # Actualizar el sistema
-    #- import_tasks: upgrade-tasks.yml
+    - import_tasks: upgrade-tasks.yml
 
-    # Instalar el CTF Gameserver
-    - import_tasks: ctf-gameserver-tasks.yml
+    # Construir el paquete .deb del CTF Gameserver
+    - import_tasks: debian-package-tasks.yml
+
+    # Instalar los roles con los diferentes componentes
+    - name: Instalar el rol db_prolog
+      include_role:
+        name: fausecteam.ctf_gameserver_ansible.db_prolog
+    - name: Instalar el rol web
+      include_role:
+        name: fausecteam.ctf_gameserver_ansible.web
+    - name: Instalar el rol db_epilog
+      include_role:
+        name: fausecteam.ctf_gameserver_ansible.db_epilog
+    - name: Instalar el rol controller
+      include_role:
+        name: fausecteam.ctf_gameserver_ansible.controller
+    - name: Instalar el rol submission
+      include_role:
+        name: fausecteam.ctf_gameserver_ansible.submission
+    - name: Instalar el rol checker
+      include_role:
+        name: fausecteam.ctf_gameserver_ansible.checker
