@@ -5,6 +5,8 @@ FROM hashicorp/terraform:${TERRAFORM_VERSION}
 # Instalar los paquetes necesarios
 RUN apk add ansible openssh curl jq
 
+RUN ansible-galaxy collection install fausecteam.ctf_gameserver_ansible
+
 # Copiar los scripts al contenedor
 COPY --chmod=0755 ../scripts/*.sh /usr/bin/
 
