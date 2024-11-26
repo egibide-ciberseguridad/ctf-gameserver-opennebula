@@ -1,7 +1,3 @@
-data "opennebula_image" "empty_image" {
-  name = "Empty disk"
-}
-
 resource "opennebula_virtual_machine" "nodes" {
 
   depends_on = [
@@ -40,13 +36,7 @@ resource "opennebula_virtual_machine" "nodes" {
   disk {
     image_id = data.opennebula_template.template.disk[0].image_id
     target   = "vda"
-    size     = local.opennebula.limits.nodes.disk1
-  }
-
-  disk {
-    image_id = data.opennebula_image.empty_image.id
-    target   = "vdb"
-    size     = local.opennebula.limits.nodes.disk2
+    size     = local.opennebula.limits.nodes.disk
   }
 }
 
