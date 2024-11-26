@@ -26,8 +26,13 @@
     - import_tasks: docker-tasks.yml
 
     # Configurar SSH
-    - name: Copiar la clave SSH del equipo
+    - name: Copiar la clave SSH privada del equipo
       ansible.builtin.copy:
         src: /output/team-{{ team_id }}/id_rsa
         dest: /root/.ssh/id_rsa
         mode: '0400'
+    - name: Autorizar la clave SSH pública del equipo
+      ansible.posix.authorized_key:
+        user: root
+        state: present
+        key: "{{ lookup('file', '/output/team-'+team_id+'/id_rsa.pub') }}"

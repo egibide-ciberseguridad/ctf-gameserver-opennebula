@@ -42,7 +42,9 @@ resource "opennebula_virtual_machine" "nodes" {
 
 resource "null_resource" "hosts_nodes" {
   depends_on = [
-    opennebula_virtual_machine.nodes
+    opennebula_virtual_machine.nodes,
+    local_file.team-private-key-file,
+    local_file.team-public-key-file
   ]
 
   count = var.nodes

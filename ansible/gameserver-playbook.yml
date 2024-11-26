@@ -51,3 +51,10 @@
 
     # Configurar el servidor web
     - import_tasks: web-tasks.yml
+
+    # Configurar SSH
+    - name: Copiar todas las claves SSH privadas para el checker
+      ansible.builtin.copy:
+        src: /output/
+        dest: /keys/
+        mode: '0400'
