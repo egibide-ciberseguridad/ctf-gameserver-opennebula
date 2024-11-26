@@ -1,11 +1,8 @@
 - name: Instalar Git
   apt:
-    name: "{{ packages }}"
-    state: present
-    update_cache: yes
-  vars:
-    packages:
+    name:
       - git
+    state: present
 
 - name: Configurar APT para que no pida confirmación
   ansible.builtin.shell: |

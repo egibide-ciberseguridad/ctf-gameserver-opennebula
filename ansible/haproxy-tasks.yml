@@ -14,12 +14,9 @@
 
 - name: Instalar HAProxy
   apt:
-    name: "{{ packages }}"
-    state: present
-    update_cache: yes
-  vars:
-    packages:
+    name:
       - haproxy={{ haproxy_version }}.*
+    state: present
 
 - name: Parar el servicio HAProxy
   service:

@@ -14,14 +14,11 @@
 
 - name: Instalar Docker y sus dependencias
   apt:
-    name: "{{ packages }}"
-    state: present
-    update_cache: yes
-  vars:
-    packages:
+    name:
       - docker-ce
       - docker-ce-cli
       - containerd.io
+    state: present
 
 - name: Arrancar el servicio Docker
   service:
