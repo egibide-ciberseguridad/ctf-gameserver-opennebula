@@ -5,6 +5,9 @@ locals {
     join("\n", flatten([
       for i in opennebula_virtual_machine.nodes[*] : join(" ", [i.nic[0].computed_ip, i.name])
     ])),
+    join("\n", flatten([
+      for i in opennebula_virtual_machine.subs[*] : join(" ", [i.nic[0].computed_ip, i.name])
+    ])),
     join(" ", [local.haproxy.private_ip, opennebula_virtual_machine.haproxy.name]),
     ""
   ])
