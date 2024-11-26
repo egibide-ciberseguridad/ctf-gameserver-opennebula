@@ -5,7 +5,8 @@ data "opennebula_image" "empty_image" {
 resource "opennebula_virtual_machine" "nodes" {
 
   depends_on = [
-    opennebula_virtual_machine.gameserver
+    opennebula_virtual_machine.gameserver,
+    opennebula_virtual_network_address_range.teams
   ]
 
   count = var.nodes
@@ -33,7 +34,7 @@ resource "opennebula_virtual_machine" "nodes" {
 
   nic {
     model      = "virtio"
-    network_id = data.opennebula_virtual_network.network.id
+    network_id = opennebula_virtual_network.teams[count.index].id
   }
 
   disk {

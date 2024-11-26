@@ -1,0 +1,47 @@
+resource "opennebula_virtual_network" "gameserver" {
+  name   = "ctf-gameserver"
+  type   = "bridge"
+  bridge = "aulas"
+  mtu    = 1500
+
+  gateway      = "172.20.1.2"
+  dns          = "192.168.10.1 1.1.1.1"
+  network_mask = "255.255.0.0"
+
+  permissions = "642"
+  group       = "oneadmin"
+  security_groups = [0]
+}
+
+resource "opennebula_virtual_network_address_range" "gameserver" {
+  virtual_network_id = opennebula_virtual_network.gameserver.id
+  ar_type            = "IP4"
+  size               = 10
+  ip4                = "172.20.227.1"
+}
+
+resource "opennebula_virtual_network" "teams" {
+  count = 2
+
+  name   = "ctf-team-${count.index + 1}"
+  type   = "bridge"
+  bridge = "aulas"
+  mtu    = 1500
+
+  gateway      = "172.20.1.2"
+  dns          = "192.168.10.1 1.1.1.1"
+  network_mask = "255.255.0.0"
+
+  permissions = "642"
+  group       = "oneadmin"
+  security_groups = [0]
+}
+
+resource "opennebula_virtual_network_address_range" "teams" {
+  count = 2
+
+  virtual_network_id = opennebula_virtual_network.teams[count.index].id
+  ar_type            = "IP4"
+  size               = 10
+  ip4                = "172.20.227.${10 * (count.index + 1)}"
+}
