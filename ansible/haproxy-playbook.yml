@@ -19,5 +19,8 @@
   vars_files:
     - versiones.yml
   tasks:
+    # Actualizar el sistema
+    - import_tasks: upgrade-tasks.yml
+
     # Instalar HAProxy
-    #- import_tasks: haproxy-tasks.yml
+    - import_tasks: haproxy-tasks.yml

@@ -23,6 +23,9 @@
     # Actualizar el sistema
     - import_tasks: upgrade-tasks.yml
 
+    # Instalar Docker
+    - import_tasks: docker-tasks.yml
+
     # Construir el paquete .deb del CTF Gameserver
     - import_tasks: debian-package-tasks.yml
 

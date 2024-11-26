@@ -60,31 +60,9 @@ resource "null_resource" "hosts_nodes" {
   }
 }
 
-resource "null_resource" "ansible_nodes_common" {
-  depends_on = [
-    null_resource.hosts_nodes
-  ]
-
-  count = var.nodes
-
-  provisioner "local-exec" {
-    quiet   = true
-    command = <<EOT
-      ANSIBLE_HOST_KEY_CHECKING=False \
-      ANSIBLE_FORCE_COLOR=True \
-      ansible-playbook \
-        -i "${local.nodes[count.index].name}," \
-        --ssh-common-args '-o ProxyCommand="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 22 -W %h:%p -q root@${local.haproxy.connection_ip}"' \
-        --extra-vars "haproxy_connection_ip=${local.haproxy.connection_ip}" \
-        --extra-vars "node_ip=${local.nodes[count.index].private_ip}" \
-        /ansible/common-playbook.yml
-    EOT
-  }
-}
-
 resource "null_resource" "ansible_nodes" {
   depends_on = [
-    null_resource.ansible_nodes_common,
+    null_resource.hosts_nodes
   ]
 
   count = var.nodes

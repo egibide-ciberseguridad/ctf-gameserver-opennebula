@@ -71,20 +71,6 @@ resource "null_resource" "ansible_gameserver" {
         --ssh-common-args '-o ProxyCommand="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 22 -W %h:%p -q root@${local.haproxy.connection_ip}"' \
         --extra-vars "haproxy_connection_ip=${local.haproxy.connection_ip}" \
         --extra-vars "node_ip=${local.gameserver.private_ip}" \
-        /ansible/common-playbook.yml
-    EOT
-  }
-
-  provisioner "local-exec" {
-    quiet   = true
-    command = <<EOT
-      ANSIBLE_HOST_KEY_CHECKING=False \
-      ANSIBLE_FORCE_COLOR=True \
-      ansible-playbook \
-        -i "${local.gameserver.name}," \
-        --ssh-common-args '-o ProxyCommand="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 22 -W %h:%p -q root@${local.haproxy.connection_ip}"' \
-        --extra-vars "haproxy_connection_ip=${local.haproxy.connection_ip}" \
-        --extra-vars "node_ip=${local.gameserver.private_ip}" \
         --extra-vars "haproxy_ip=${local.haproxy.private_ip}" \
         /ansible/gameserver-playbook.yml
     EOT
