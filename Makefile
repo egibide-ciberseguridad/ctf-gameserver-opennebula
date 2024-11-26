@@ -36,8 +36,11 @@ init:
 plan:
 	@docker compose run --rm terraform-ansible terraform -chdir=/terraform plan
 
-provision:
+provision-gameserver:
 	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="null_resource.ansible_gameserver"
+
+provision-node:
+	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="null_resource.ansible_nodes[0]"
 
 apply:
 	@docker compose run --rm terraform-ansible time -f "Tiempo total: %E" terraform -chdir=/terraform apply -auto-approve
