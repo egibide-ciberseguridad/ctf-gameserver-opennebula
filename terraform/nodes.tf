@@ -76,6 +76,7 @@ resource "null_resource" "ansible_nodes" {
         -i "${local.nodes[count.index].name}," \
         --ssh-common-args '-o ProxyCommand="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 22 -W %h:%p -q root@${local.haproxy.connection_ip}"' \
         --extra-vars "haproxy_connection_ip=${local.haproxy.connection_ip}" \
+        --extra-vars "team_id=${count.index+1}" \
         /ansible/node-playbook.yml
     EOT
   }
