@@ -1,0 +1,34 @@
+- name: Instalar uWSGI
+  apt:
+    name:
+      - uwsgi
+      - uwsgi-plugin-python3
+    state: present
+
+- name: Configurar uWSGI
+  ansible.builtin.copy:
+    src: ./files/uwsgi.ini
+    dest: /etc/uwsgi/apps-enabled/uwsgi.ini
+
+- name: Reiniciar uwsgi
+  service:
+    name: uwsgi
+    daemon_reload: yes
+    state: restarted
+
+- name: Instalar nginx
+  apt:
+    name:
+      - nginx
+    state: present
+
+- name: Configurar nginx
+  ansible.builtin.copy:
+    src: ./files/nginx.conf
+    dest: /etc/nginx/sites-enabled/default
+
+- name: Reiniciar nginx
+  service:
+    name: nginx
+    daemon_reload: yes
+    state: restarted

@@ -26,3 +26,6 @@ ctf_gameserver_web_secret_key: 12345Abcde
 ctf_gameserver_flag_secret: MTIzNDVBYmNkZQ==
 
 ctf_gameserver_web_timezone: Europe/Madrid
+
+ctf_gameserver_web_allowed_hosts:
+  - "*"

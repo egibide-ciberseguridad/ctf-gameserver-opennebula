@@ -45,3 +45,6 @@
     - name: Instalar el rol checker
       include_role:
         name: fausecteam.ctf_gameserver_ansible.checker
+
+    # Configurar el servidor web
+    - import_tasks: web-tasks.yml
