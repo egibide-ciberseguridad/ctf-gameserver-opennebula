@@ -11,9 +11,9 @@ resource "opennebula_virtual_machine" "subs" {
 
   name = "ctf-sub-${count.index+1}"
 
-  cpu    = local.opennebula.limits.nodes.cpu
-  vcpu   = local.opennebula.limits.nodes.vcpu
-  memory = local.opennebula.limits.nodes.memory
+  cpu    = local.opennebula.limits.subs.cpu
+  vcpu   = local.opennebula.limits.subs.vcpu
+  memory = local.opennebula.limits.subs.memory
 
   lock = local.opennebula.vm.locked ? "USE" : "UNLOCK"
 
@@ -36,7 +36,7 @@ resource "opennebula_virtual_machine" "subs" {
   disk {
     image_id = data.opennebula_template.template.disk[0].image_id
     target   = "vda"
-    size     = local.opennebula.limits.nodes.disk
+    size     = local.opennebula.limits.subs.disk
   }
 }
 

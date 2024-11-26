@@ -23,6 +23,12 @@ locals {
         memory = 2048
         disk   = 16384
       }
+      subs = {
+        cpu    = 0.5
+        vcpu   = 2
+        memory = 1024
+        disk   = 8192
+      }
       haproxy = {
         cpu    = 1
         vcpu   = 2
