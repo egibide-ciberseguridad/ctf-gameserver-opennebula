@@ -21,7 +21,7 @@ resource "opennebula_virtual_network_address_range" "gameserver" {
 }
 
 resource "opennebula_virtual_network" "teams" {
-  count = 2
+  count = var.nodes
 
   name   = "ctf-team-${count.index + 1}"
   type   = "bridge"
@@ -38,7 +38,7 @@ resource "opennebula_virtual_network" "teams" {
 }
 
 resource "opennebula_virtual_network_address_range" "teams" {
-  count = 2
+  count = var.nodes
 
   virtual_network_id = opennebula_virtual_network.teams[count.index].id
   ar_type            = "IP4"
