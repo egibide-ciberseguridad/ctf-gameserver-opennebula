@@ -42,6 +42,9 @@ provision-gameserver:
 provision-node:
 	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="null_resource.ansible_nodes[0]"
 
+hosts:
+	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="null_resource.hosts_gameserver" -replace="null_resource.hosts_haproxy"	-replace="null_resource.hosts_nodes[0]"
+
 provision-sub:
 	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="opennebula_virtual_machine.subs[0]"
 	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="null_resource.ansible_subs[0]"
