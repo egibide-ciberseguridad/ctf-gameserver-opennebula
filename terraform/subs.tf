@@ -1,7 +1,7 @@
 resource "opennebula_virtual_machine" "subs" {
 
   depends_on = [
-    opennebula_virtual_machine.gameserver,
+    opennebula_virtual_machine.nodes,
     opennebula_virtual_network_address_range.teams
   ]
 
