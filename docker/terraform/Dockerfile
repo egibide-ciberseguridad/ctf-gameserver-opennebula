@@ -3,7 +3,7 @@ ARG TERRAFORM_VERSION=latest
 FROM hashicorp/terraform:${TERRAFORM_VERSION}
 
 # Instalar los paquetes necesarios
-RUN apk add ansible openssh curl jq
+RUN apk add ansible openssh curl jq make
 
 RUN ansible-galaxy collection install fausecteam.ctf_gameserver_ansible
 
