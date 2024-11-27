@@ -29,3 +29,5 @@ ctf_gameserver_web_timezone: Europe/Madrid
 
 ctf_gameserver_web_allowed_hosts:
   - "*"
+
+ctf_gameserver_checker_ippattern: 172.20.227.%d0
