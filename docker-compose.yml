@@ -13,6 +13,7 @@ services:
       - ./ansible:/ansible
       - ./private/ssh:/root/.ssh
       - ./private/output:/output
+      - ./services:/services
 
 networks:
   default:
