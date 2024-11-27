@@ -57,6 +57,7 @@
       ansible.builtin.copy:
         src: /output/
         dest: /keys/
+        owner: ctf-checkerrunner
         mode: '0400'
 
     # Página de inicio
