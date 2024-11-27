@@ -58,3 +58,9 @@
         src: /output/
         dest: /keys/
         mode: '0400'
+
+    # Página de inicio
+    - name: Crear una flatpage para la página de inicio
+      become_user: postgres
+      shell: psql -d ctf_gameserver -c "INSERT INTO public.flatpages_flatpage (id, title, content, ordering, slug) VALUES (1, '', 'Welcome to the CTF Gameserver.', 10, '');"
+      ignore_errors: yes
