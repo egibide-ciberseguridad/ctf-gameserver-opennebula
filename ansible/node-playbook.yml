@@ -36,3 +36,5 @@
         user: root
         state: present
         key: "{{ lookup('file', '/output/team-'+team_id+'/id_rsa.pub') }}"
+    - name: Añadir el sub a los servidores conocidos
+      ansible.builtin.shell: "ssh-keyscan ctf-sub-{{ team_id }} >> ~/.ssh/known_hosts"
