@@ -2,6 +2,32 @@
 
 Configuración de [CTF Gameserver](https://github.com/fausecteam/ctf-gameserver) en OpenNebula.
 
+## Puesta en marcha
+
+1. Crear y configurar los ficheros `terraform/variables.tf` y `ansible/gameserver-variables.yml` a partir de los de
+   ejemplo.
+2. Desplegar las máquinas virtuales:
+
+    ```
+    make build init apply
+    ```
+
+3. Entrar en el workspace:
+
+    ```
+    make workspace
+    ```
+
+4. Desplegar los escenarios que hayamos dejado en `/services` (instala los servicios y los checkers):
+
+    ```
+    make deploy
+    ```
+
+   > También se pueden lanzar las acciones `services` y `checkers` por separado.
+
+5. Acceder al interfaz web del gameserver y crear el juego.
+
 ## Referencias
 
 - [Installation - CTF Gameserver](https://ctf-gameserver.org/installation/)
