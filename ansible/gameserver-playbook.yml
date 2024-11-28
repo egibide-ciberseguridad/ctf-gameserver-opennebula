@@ -56,7 +56,7 @@
     - name: Copiar todas las claves SSH privadas para el checker
       ansible.builtin.copy:
         src: /keys/
-        dest: /keys/
+        dest: /keys
         mode: '0444'
 
     # Página de inicio
