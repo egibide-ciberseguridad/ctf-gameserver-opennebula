@@ -73,6 +73,7 @@ resource "null_resource" "ansible_gameserver" {
         --extra-vars "haproxy_connection_ip=${local.haproxy.connection_ip}" \
         --extra-vars "node_ip=${local.gameserver.private_ip}" \
         --extra-vars "haproxy_ip=${local.haproxy.private_ip}" \
+        --extra-vars "teams=${var.nodes}" \
         /ansible/gameserver-playbook.yml
     EOT
   }
