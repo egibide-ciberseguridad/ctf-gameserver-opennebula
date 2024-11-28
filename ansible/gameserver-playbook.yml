@@ -53,6 +53,12 @@
     - import_tasks: web-tasks.yml
 
     # Configurar SSH
+    - name: Crear el directorio /keys
+      ansible.builtin.file:
+        path: /keys
+        state: directory
+        owner: ctf-checkerrunner
+        mode: '0755'
     - name: Copiar todas las claves SSH privadas para el checker
       ansible.builtin.copy:
         src: /keys/
