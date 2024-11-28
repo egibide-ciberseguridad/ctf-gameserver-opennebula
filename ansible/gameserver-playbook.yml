@@ -81,3 +81,9 @@
       shell: psql -d ctf_gameserver -c "INSERT INTO public.registration_team (user_id, net_number, informal_email, image, affiliation, country, nop_team) VALUES ((SELECT id FROM public.auth_user WHERE username='team-{{ item }}'), {{ item }}, 'team-{{ item }}@egibide.org', '', '', 'es', false);"
       ignore_errors: yes
       with_sequence: start=1 end="{{ teams }}"
+
+    # Descargas
+    - name: Crear la descarga del fichero id_rsa
+      become_user: postgres
+      shell: psql -d ctf_gameserver -c "INSERT INTO public.registration_teamdownload (filename, description) VALUES ('id_rsa', 'Clave privada SSH.');"
+      ignore_errors: yes
