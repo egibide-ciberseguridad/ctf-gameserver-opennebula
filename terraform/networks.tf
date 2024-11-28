@@ -17,7 +17,7 @@ resource "opennebula_virtual_network_address_range" "gameserver" {
   virtual_network_id = opennebula_virtual_network.gameserver.id
   ar_type            = "IP4"
   size               = 10
-  ip4                = "172.20.227.1"
+  ip4                = "${local.opennebula.network_prefix}.1"
 }
 
 resource "opennebula_virtual_network" "teams" {
@@ -43,5 +43,5 @@ resource "opennebula_virtual_network_address_range" "teams" {
   virtual_network_id = opennebula_virtual_network.teams[count.index].id
   ar_type            = "IP4"
   size               = 10
-  ip4                = "172.20.227.${10 * (count.index + 1)}"
+  ip4                = "${local.opennebula.network_prefix}.${10 * (count.index + 1)}"
 }

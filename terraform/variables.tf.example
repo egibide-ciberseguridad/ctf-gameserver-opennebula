@@ -36,6 +36,7 @@ locals {
         disk   = 8192
       }
     }
+    network_prefix = "172.20.227"
   }
   ansible = {
     connect_to_public_ip = false
