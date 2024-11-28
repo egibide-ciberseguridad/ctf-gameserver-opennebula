@@ -4,7 +4,7 @@ Host ctf-haproxy
   IdentityFile ~/.ssh/id_rsa
 
 Host ctf-gameserver
-  Hostname ${gameserver.private_ip}
+  Hostname ${gameserver.name}
   User root
   IdentityFile ~/.ssh/id_rsa
   %{~ if is_public_ip ~}
@@ -13,7 +13,7 @@ Host ctf-gameserver
 
 %{ for item_key, item_value in items ~}
 Host ${item_value.name}
-  Hostname ${item_value.private_ip}
+  Hostname ${item_value.name}
   User root
   IdentityFile ~/.ssh/id_rsa
   %{~ if is_public_ip ~}
