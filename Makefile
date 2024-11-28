@@ -27,6 +27,7 @@ _header:
 	@echo ----------------------------
 
 build:
+	@docker run --rm -v ./private:/private alpine /bin/sh -c 'touch /private/hosts'
 	@docker compose build --pull
 
 init:
@@ -62,7 +63,6 @@ destroy:
 	@docker compose run --rm terraform-ansible time -f "Tiempo total: %E" terraform -chdir=/terraform destroy -auto-approve
 
 workspace:
-	@touch private/hosts
 	@docker compose run --rm terraform-ansible /bin/sh
 
 node?="ctf-gameserver"
@@ -71,12 +71,11 @@ ssh:
 	@docker compose run --rm terraform-ansible run_ssh.sh $(node)
 
 clean:
-	@docker compose run --rm terraform-ansible /bin/sh -c 'rm -rf /keys/*'
-	@docker compose run --rm terraform-ansible /bin/sh -c 'rm -rf /root/.ssh/*'
+	@docker run --rm -v ./private:/private alpine /bin/sh -c 'rm -rf /private/*'
 	@docker compose down -t 0 -v --remove-orphans
 
 clean-tfstate:
-	@docker compose run --rm terraform-ansible /bin/sh -c 'rm -f /terraform/terraform.tfstate*'
-	@docker compose run --rm terraform-ansible /bin/sh -c 'rm -rf /terraform/.terraform*'
+	@docker run --rm -v ./terraform:/terraform alpine /bin/sh -c 'rm -f /terraform/terraform.tfstate*'
+	@docker run --rm -v ./terraform:/terraform alpine /bin/sh -c 'rm -rf /terraform/.terraform*'
 
 nuke-apply: clean build init destroy apply
