@@ -16,5 +16,8 @@ WORKDIR /root
 # Mostrar el usuario y el host en el prompt
 ENV PS1='\u@\h:\w\$\040'
 
+# Evitar que Ansible pida confirmación de claves
+ENV ANSIBLE_HOST_KEY_CHECKING=False
+
 # Eliminar la llamada a Terraform de la imagen original
 ENTRYPOINT []
