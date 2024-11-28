@@ -70,7 +70,7 @@ ssh:
 	@docker compose run --rm terraform-ansible run_ssh.sh $(node)
 
 clean:
-	@docker compose run --rm terraform-ansible /bin/sh -c 'rm -rf /output/*'
+	@docker compose run --rm terraform-ansible /bin/sh -c 'rm -rf /keys/*'
 	@docker compose run --rm terraform-ansible /bin/sh -c 'rm -rf /root/.ssh/*'
 	@docker compose down -t 0 -v --remove-orphans
 

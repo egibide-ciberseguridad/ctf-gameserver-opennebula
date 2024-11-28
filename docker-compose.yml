@@ -12,7 +12,7 @@ services:
       - ./terraform:/terraform
       - ./ansible:/ansible
       - ./private/ssh:/root/.ssh
-      - ./private/output:/output
+      - ./private/keys:/keys
       - ./services:/services
 
 networks:

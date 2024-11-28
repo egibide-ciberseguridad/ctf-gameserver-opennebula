@@ -55,7 +55,7 @@
     # Configurar SSH
     - name: Copiar todas las claves SSH privadas para el checker
       ansible.builtin.copy:
-        src: /output/
+        src: /keys/
         dest: /keys/
         owner: ctf-checkerrunner
         mode: '0400'
