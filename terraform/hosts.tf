@@ -26,3 +26,8 @@ output "hosts" {
 output "cluster_ips" {
   value = local.cluster_ips
 }
+
+resource "local_file" "workspace_hosts" {
+  filename = "/etc/hosts"
+  content  = local.hosts
+}
