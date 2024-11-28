@@ -70,9 +70,12 @@ ssh:
 	@docker compose run --rm terraform-ansible run_ssh.sh $(node)
 
 clean:
+	@docker compose run --rm terraform-ansible /bin/sh -c 'rm -rf /output/*'
+	@docker compose run --rm terraform-ansible /bin/sh -c 'rm -rf /root/.ssh/*'
 	@docker compose down -t 0 -v --remove-orphans
 
 clean-tfstate:
 	@docker compose run --rm terraform-ansible /bin/sh -c 'rm -f /terraform/terraform.tfstate*'
+	@docker compose run --rm terraform-ansible /bin/sh -c 'rm -rf /terraform/.terraform*'
 
 nuke-apply: clean build init destroy apply
