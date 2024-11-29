@@ -78,7 +78,7 @@
       with_sequence: start=1 end="{{ teams }}"
     - name: Crear el registro del equipo
       become_user: postgres
-      shell: psql -d ctf_gameserver -c "INSERT INTO public.registration_team (user_id, net_number, informal_email, image, affiliation, country, nop_team) VALUES ((SELECT id FROM public.auth_user WHERE username='team-{{ item }}'), {{ item }}, 'team-{{ item }}@egibide.org', '', '', 'es', false);"
+      shell: psql -d ctf_gameserver -c "INSERT INTO public.registration_team (user_id, net_number, informal_email, image, affiliation, country, nop_team) VALUES ((SELECT id FROM public.auth_user WHERE username='team-{{ item }}'), {{ item }}, 'team-{{ item }}@egibide.org', '', 'Egibide', 'es', false);"
       ignore_errors: yes
       with_sequence: start=1 end="{{ teams }}"
 
