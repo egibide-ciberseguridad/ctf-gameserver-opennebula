@@ -1,0 +1,38 @@
+- name: Instalar dependencias
+  apt:
+    name:
+      - python3-configargparse
+    state: present
+
+- name: Copiar el descriptor del servicio
+  ansible.builtin.copy:
+    src: ./files/submission.service
+    dest: /etc/systemd/system/submission.service
+
+- name: Copiar el ejecutable del servicio
+  ansible.builtin.copy:
+    src: ./files/ctf-team-submission
+    dest: /usr/bin/ctf-team-submission
+    mode: '0755'
+
+- name: Crear el directorio de configuración del servicio
+  ansible.builtin.file:
+    state: directory
+    path: /etc/ctf-team-submission
+
+- name: Copiar el fichero de configuración del servicio
+  ansible.builtin.copy:
+    src: ./files/submission.env
+    dest: /etc/ctf-team-submission/submission.env
+
+- name: Copiar el programa del servicio
+  ansible.builtin.copy:
+    src: ./files/dist/
+    dest: /usr/lib/python3/dist-packages/ctfteamsubmission
+
+- name: Arrancar el servicio de envío
+  ansible.builtin.systemd_service:
+    state: started
+    enabled: yes
+    daemon_reload: true
+    name: submission.service

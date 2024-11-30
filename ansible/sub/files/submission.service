@@ -1,0 +1,16 @@
+[Unit]
+Description=Flag submission for teams
+
+[Service]
+Type=notify
+User=root
+EnvironmentFile=/etc/ctf-team-submission/submission.env
+ExecStart=/usr/bin/ctf-team-submission
+# Allow waiting for Checker Scripts to finish
+TimeoutStopSec=90
+Restart=on-failure
+RestartSec=5
+SyslogIdentifier=team-submission
+
+[Install]
+WantedBy=multi-user.target
