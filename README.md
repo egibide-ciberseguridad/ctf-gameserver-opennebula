@@ -30,6 +30,10 @@ Configuración de [CTF Gameserver](https://github.com/fausecteam/ctf-gameserver)
 
 5. Acceder al interfaz web del gameserver y crear el juego.
 
+## Estructura de servidores
+
+![](docs/diagrama.png)
+
 ## Referencias
 
 - [Installation - CTF Gameserver](https://ctf-gameserver.org/installation/)
