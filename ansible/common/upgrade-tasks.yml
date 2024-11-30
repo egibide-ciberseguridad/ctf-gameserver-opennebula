@@ -12,12 +12,6 @@
   ansible.builtin.reboot:
   when: reboot_required_file.stat.exists == true
 
-- name: Esperar al reinicio
-  ansible.builtin.wait_for:
-    port: 22
-    delay: 10
-    timeout: 60
-
 - name: Eliminar dependencias obsoletas
   ansible.builtin.apt:
     autoremove: yes
