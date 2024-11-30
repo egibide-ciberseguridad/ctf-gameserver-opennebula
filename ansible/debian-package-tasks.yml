@@ -14,10 +14,10 @@
     path: /tmp/build
 
 - name: Clonar el repositorio del CTF Gameserver
-  ansible.builtin.shell: |
-    git clone https://github.com/fausecteam/ctf-gameserver.git
-  args:
-    chdir: /tmp/build
+  ansible.builtin.git:
+    repo: "{{ gameserver_git_repo_url }}"
+    dest: /tmp/build/ctf-gameserver
+    version: master
 
 - name: Construir el paquete .deb
   ansible.builtin.shell: |
