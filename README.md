@@ -20,6 +20,8 @@ Configuración de [CTF Gameserver](https://github.com/fausecteam/ctf-gameserver)
 
 4. Desplegar los escenarios que hayamos dejado en `/services` (instala los servicios y los checkers):
 
+   > Ajustar el número de equipos en el fichero `hosts.ini`.
+
     ```
     make deploy
     ```
