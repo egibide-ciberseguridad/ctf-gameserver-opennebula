@@ -14,13 +14,12 @@
   hosts: reachable
   vars:
     ansible_python_interpreter: auto_silent
+    haproxy_version: "2.8"  # https://www.haproxy.org
   gather_facts: yes
   become: true
-  vars_files:
-    - versiones.yml
   tasks:
     # Actualizar el sistema
-    - import_tasks: upgrade-tasks.yml
+    - import_tasks: common/upgrade-tasks.yml
 
     # Instalar HAProxy
-    - import_tasks: haproxy-tasks.yml
+    - import_tasks: haproxy/haproxy-tasks.yml

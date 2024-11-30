@@ -17,14 +17,13 @@
   gather_facts: yes
   become: true
   vars_files:
-    - versiones.yml
-    - gameserver-variables.yml
+    - gameserver/variables.yml
   tasks:
     # Actualizar el sistema
-    - import_tasks: upgrade-tasks.yml
+    - import_tasks: common/upgrade-tasks.yml
 
     # Construir el paquete .deb del CTF Gameserver
-    - import_tasks: debian-package-tasks.yml
+    - import_tasks: gameserver/debian-package-tasks.yml
 
     # Instalar los roles con los diferentes componentes
     - name: Instalar el rol db_prolog
@@ -47,7 +46,7 @@
         name: fausecteam.ctf_gameserver_ansible.checker
 
     # Configurar el servidor web
-    - import_tasks: web-tasks.yml
+    - import_tasks: gameserver/web-tasks.yml
 
     # Configurar SSH
     - name: Crear el directorio /keys

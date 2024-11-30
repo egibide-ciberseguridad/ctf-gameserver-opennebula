@@ -16,14 +16,12 @@
     ansible_python_interpreter: auto_silent
   gather_facts: yes
   become: true
-  vars_files:
-    - versiones.yml
   tasks:
     # Actualizar el sistema
-    - import_tasks: upgrade-tasks.yml
+    - import_tasks: common/upgrade-tasks.yml
 
     # Instalar Docker
-    - import_tasks: docker-tasks.yml
+    - import_tasks: common/docker-tasks.yml
 
     # Configurar SSH
     - name: Autorizar la clave SSH pública del equipo

@@ -87,6 +87,6 @@ ansible/join
 
 private/
 
-ansible/gameserver-variables.yml
+ansible/gameserver/variables.yml
 
 services/
