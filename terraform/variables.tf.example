@@ -8,15 +8,15 @@ locals {
     vm = {
       tag     = "debian-terraform"
       tag_desktop = "debian-terraform-desktop"
-      network = "ciber-xx"
+      network = "haproxy-public-network"
       locked  = false
     }
     limits = {
       gameserver = {
         cpu    = 2
         vcpu   = 4
-        memory = 4096
-        disk   = 16384
+        memory = 2048
+        disk   = 8192
       }
       nodes = {
         cpu    = 1
@@ -31,19 +31,19 @@ locals {
         disk   = 4096
       }
       haproxy = {
-        cpu    = 1
-        vcpu   = 2
-        memory = 1024
-        disk   = 8192
-      }
-      developer = {
         cpu    = 2
         vcpu   = 4
-        memory = 4096
+        memory = 1024
+        disk   = 4096
+      }
+      developer = {
+        cpu    = 1
+        vcpu   = 2
+        memory = 2048
         disk   = 16384
       }
     }
-    network_prefix = "172.20.227"
+    network_prefix = "172.20.228"
   }
   ansible = {
     connect_to_public_ip = false
