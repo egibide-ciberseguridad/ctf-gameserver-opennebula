@@ -27,7 +27,7 @@
 
 - name: Copiar el programa del servicio
   ansible.builtin.copy:
-    src: ./files/dist/
+    src: ./files/ctfteamsubmission/
     dest: /usr/lib/python3/dist-packages/ctfteamsubmission
 
 - name: Arrancar el servicio de envío
