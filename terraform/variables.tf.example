@@ -6,10 +6,9 @@ locals {
       token    = "4b8cf5....................................................c1cb11"
     }
     vm = {
-      tag     = "debian-terraform"
+      tag         = "debian-terraform"
       tag_desktop = "debian-terraform-desktop"
-      network = "haproxy-public-network"
-      locked  = false
+      locked      = false
     }
     limits = {
       gameserver = {
@@ -43,7 +42,9 @@ locals {
         disk   = 16384
       }
     }
-    network_prefix = "172.20.228"
+    network_prefix      = "172.20.228"
+    public_network_ip   = "172.20.227.240"
+    public_network_size = "5"
   }
   ansible = {
     connect_to_public_ip = false

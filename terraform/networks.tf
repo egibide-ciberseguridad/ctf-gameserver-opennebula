@@ -1,3 +1,25 @@
+resource "opennebula_virtual_network" "public" {
+  name   = "ctf-public"
+  type   = "bridge"
+  bridge = "aulas"
+  mtu    = 1500
+
+  gateway      = "172.20.1.2"
+  dns          = "192.168.10.1 1.1.1.1"
+  network_mask = "255.255.0.0"
+
+  permissions = "642"
+  group       = "oneadmin"
+  security_groups = [0]
+}
+
+resource "opennebula_virtual_network_address_range" "public" {
+  virtual_network_id = opennebula_virtual_network.public.id
+  ar_type            = "IP4"
+  size               = local.opennebula.public_network_size
+  ip4                = local.opennebula.public_network_ip
+}
+
 resource "opennebula_virtual_network" "gameserver" {
   name   = "ctf-gameserver"
   type   = "bridge"

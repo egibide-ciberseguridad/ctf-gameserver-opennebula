@@ -11,10 +11,6 @@ data "opennebula_template" "template" {
   id = data.opennebula_templates.search.templates[0].id
 }
 
-data "opennebula_virtual_network" "network" {
-  name = local.opennebula.vm.network
-}
-
 data "opennebula_templates" "search_developer" {
   name_regex = ".*"
   tags = {
