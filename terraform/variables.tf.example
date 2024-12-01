@@ -24,15 +24,15 @@ locals {
         disk   = 8192
       }
       subs = {
-        cpu    = 0.5
+        cpu    = 0.25
         vcpu   = 2
-        memory = 512
+        memory = 256
         disk   = 4096
       }
       haproxy = {
         cpu    = 2
         vcpu   = 4
-        memory = 1024
+        memory = 512
         disk   = 4096
       }
       developer = {
