@@ -25,8 +25,6 @@ def main():
         read_hot_folder(args.path, args.ip, args.port)
         time.sleep(10)
 
-    return os.EX_OK
-
 
 def submit_flag(flag, ip, port):
     try:

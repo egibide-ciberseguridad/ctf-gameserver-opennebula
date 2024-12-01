@@ -47,7 +47,7 @@ hosts:
 	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="null_resource.hosts_gameserver" -replace="null_resource.hosts_haproxy"	-replace="null_resource.hosts_nodes[0]"
 
 provision-sub:
-	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="null_resource.ansible_subs[1]"
+	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="null_resource.ansible_subs[0]"
 
 apply:
 	@docker compose run --rm terraform-ansible time -f "Tiempo total: %E" terraform -chdir=/terraform apply -auto-approve
