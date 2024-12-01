@@ -1,12 +1,13 @@
 locals {
   opennebula = {
     connection = {
-      username = "ciber-xx"
-      group    = "ciber-xx"
+      username = "ctf"
+      group    = "ctf"
       token    = "4b8cf5....................................................c1cb11"
     }
     vm = {
       tag     = "debian-terraform"
+      tag_desktop = "debian-terraform-desktop"
       network = "ciber-xx"
       locked  = false
     }
@@ -21,19 +22,25 @@ locals {
         cpu    = 1
         vcpu   = 2
         memory = 2048
-        disk   = 16384
+        disk   = 8192
       }
       subs = {
         cpu    = 0.5
         vcpu   = 2
-        memory = 1024
-        disk   = 8192
+        memory = 512
+        disk   = 4096
       }
       haproxy = {
         cpu    = 1
         vcpu   = 2
         memory = 1024
         disk   = 8192
+      }
+      developer = {
+        cpu    = 2
+        vcpu   = 4
+        memory = 4096
+        disk   = 16384
       }
     }
     network_prefix = "172.20.227"

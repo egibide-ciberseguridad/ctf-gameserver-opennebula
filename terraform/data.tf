@@ -14,3 +14,16 @@ data "opennebula_template" "template" {
 data "opennebula_virtual_network" "network" {
   name = local.opennebula.vm.network
 }
+
+data "opennebula_templates" "search_developer" {
+  name_regex = ".*"
+  tags = {
+    TAG = local.opennebula.vm.tag_desktop
+  }
+  sort_on = "register_date"
+  order   = "ASC" # La más reciente
+}
+
+data "opennebula_template" "template_developer" {
+  id = data.opennebula_templates.search_developer.templates[0].id
+}
