@@ -4,7 +4,7 @@ Configuración de [CTF Gameserver](https://github.com/fausecteam/ctf-gameserver)
 
 ## Puesta en marcha
 
-1. Crear y configurar los ficheros `terraform/variables.tf` y `ansible/gameserver-variables.yml` a partir de los de
+1. Crear y configurar los ficheros `terraform/variables.tf` y `ansible/gameserver/variables.yml` a partir de los de
    ejemplo.
 2. Desplegar las máquinas virtuales:
 
@@ -41,3 +41,4 @@ Configuración de [CTF Gameserver](https://github.com/fausecteam/ctf-gameserver)
 - [CTF Gameserver Ansible](https://github.com/fausecteam/ctf-gameserver-ansible)
 - [Servir Aplicaciones Django con uWSGI y Nginx en Debian](https://www.reddit.com/r/Python/comments/5jcgr0/comment/dbg57jc/)
 - [TLS Provider](https://registry.terraform.io/providers/hashicorp/tls/latest/docs)
+- [HAProxy Configuration Basics: Load Balance Your Servers](https://www.haproxy.com/blog/haproxy-configuration-basics-load-balance-your-servers)
