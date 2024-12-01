@@ -26,6 +26,9 @@
     src: /certs/haproxy/server.pem
     dest: /etc/ssl/private/server.pem
 
+- name: Sobreescribir el fichero de configuración
+  command: mv /tmp/haproxy.cfg /etc/haproxy/haproxy.cfg
+
 - name: Reiniciar el servicio HAProxy
   service:
     name: haproxy
