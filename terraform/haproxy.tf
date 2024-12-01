@@ -54,9 +54,31 @@ resource "null_resource" "hosts_haproxy" {
   }
 }
 
+resource "null_resource" "config_haproxy" {
+  depends_on = [
+    opennebula_virtual_machine.haproxy
+  ]
+
+  provisioner "file" {
+    connection {
+      host = local.haproxy.connection_ip
+      user = "root"
+      private_key = file("~/.ssh/id_rsa")
+    }
+
+    content = templatefile("${path.module}/haproxy.tftpl", {
+      haproxy    = local.haproxy,
+      gameserver = local.gameserver,
+    })
+    destination = "/etc/haproxy/haproxy.cfg"
+  }
+}
+
 resource "null_resource" "ansible_haproxy" {
   depends_on = [
     null_resource.hosts_haproxy,
+    null_resource.config_haproxy,
+    local_file.haproxy-cert-file,
   ]
 
   provisioner "local-exec" {

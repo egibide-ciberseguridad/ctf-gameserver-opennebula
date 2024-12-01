@@ -13,6 +13,7 @@ services:
       - ./ansible:/ansible
       - ./private/ssh:/root/.ssh
       - ./private/keys:/keys
+      - ./private/certs:/certs
       - ./services:/services
       - ./private/hosts:/etc/hosts
 

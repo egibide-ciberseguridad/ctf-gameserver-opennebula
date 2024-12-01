@@ -18,11 +18,16 @@
       - haproxy={{ haproxy_version }}.*
     state: present
 
-- name: Parar el servicio HAProxy
-  service:
-    name: haproxy
-    state: stopped
-    enabled: no
-
 - name: Usar el comando setcap para permitir a HAProxy utilizar los puertos 80 y 443
   command: setcap cap_net_bind_service=+ep /usr/sbin/haproxy
+
+- name: Instalar el certificado autofirmado
+  ansible.builtin.copy:
+    src: /certs/haproxy/server.pem
+    dest: /etc/ssl/private/server.pem
+
+- name: Reiniciar el servicio HAProxy
+  service:
+    name: haproxy
+    state: restarted
+    enabled: yes
