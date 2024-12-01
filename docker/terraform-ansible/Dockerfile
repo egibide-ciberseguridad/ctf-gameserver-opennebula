@@ -11,6 +11,8 @@ RUN apk add bash bash-completion shadow && \
 
 RUN ansible-galaxy collection install fausecteam.ctf_gameserver_ansible
 
+RUN apk add py3-requests py3-beautifulsoup4
+
 # Copiar los scripts al contenedor
 COPY --chmod=0755 ../scripts/*.sh /usr/bin/
 
