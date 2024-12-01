@@ -62,7 +62,7 @@ destroy:
 	@docker compose run --rm terraform-ansible time -f "Tiempo total: %E" terraform -chdir=/terraform destroy -auto-approve
 
 workspace:
-	@docker compose run --rm terraform-ansible /bin/sh
+	@docker compose run --rm terraform-ansible
 
 node?="ctf-gameserver"
 

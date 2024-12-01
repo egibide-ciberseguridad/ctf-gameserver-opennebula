@@ -5,6 +5,10 @@ FROM hashicorp/terraform:${TERRAFORM_VERSION}
 # Instalar los paquetes necesarios
 RUN apk add ansible openssh curl jq make
 
+RUN apk add bash bash-completion shadow && \
+    chsh root --shell /bin/bash && \
+    apk del shadow
+
 RUN ansible-galaxy collection install fausecteam.ctf_gameserver_ansible
 
 # Copiar los scripts al contenedor
@@ -22,3 +26,5 @@ ENV ANSIBLE_PYTHON_INTERPRETER=auto_silent
 
 # Eliminar la llamada a Terraform de la imagen original
 ENTRYPOINT []
+
+CMD ["/bin/bash"]
