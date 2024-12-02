@@ -38,3 +38,5 @@ gameserver_git_repo_url: https://github.com/fausecteam/ctf-gameserver.git
 ctf_gameserver_submission_listen_host: ctf-gameserver
 ctf_gameserver_submission_listen_ports: 6666
 ctf_gameserver_submission_team_regex: '^172\.20\.227\.(\d+)1$'
+
+teams_pass: 12345Abcde
