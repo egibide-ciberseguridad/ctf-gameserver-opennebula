@@ -22,8 +22,7 @@ ctf_gameserver_web_from_email: noreply@egibide.org
 
 ctf_gameserver_web_secret_key: 12345Abcde
 
-# base64 12345Abcde
-ctf_gameserver_flag_secret: MTIzNDVBYmNkZQ==
+ctf_gameserver_flag_secret: "{{ '12345Abcde' | b64encode }}"
 
 ctf_gameserver_web_timezone: Europe/Madrid
 
