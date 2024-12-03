@@ -1,0 +1,20 @@
+- name: Copiar la utilidad de contraseñas
+  ansible.builtin.copy:
+    src: ./gameserver/files/make_password.py
+    dest: /tmp/make_password.py
+
+- name: Encriptar la contraseña de los equipos
+  shell: PYTHONPATH=/etc/ctf-gameserver/web DJANGO_SETTINGS_MODULE=prod_settings python3 /tmp/make_password.py {{ teams_pass }}
+  register: teams_pass_encrypted
+
+- name: Crear el usuario del equipo
+  become_user: postgres
+  shell: psql -d ctf_gameserver -c "INSERT INTO public.auth_user (username, password, email, is_superuser, is_staff, is_active, first_name, last_name, date_joined) VALUES ('team-{{ item }}', '{{ teams_pass_encrypted.stdout }}', 'team-{{ item }}@egibide.org', 'false', 'false', 'true', '', '', NOW());"
+  ignore_errors: yes
+  with_sequence: start=1 end="{{ teams }}"
+
+- name: Crear el registro del equipo
+  become_user: postgres
+  shell: psql -d ctf_gameserver -c "INSERT INTO public.registration_team (user_id, net_number, informal_email, image, affiliation, country, nop_team) VALUES ((SELECT id FROM public.auth_user WHERE username='team-{{ item }}'), {{ item }}, 'team-{{ item }}@egibide.org', '', 'Egibide', 'es', false);"
+  ignore_errors: yes
+  with_sequence: start=1 end="{{ teams }}"
