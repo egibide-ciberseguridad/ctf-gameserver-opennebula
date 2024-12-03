@@ -40,3 +40,9 @@ ctf_gameserver_submission_listen_ports: 6666
 ctf_gameserver_submission_team_regex: '^172\.20\.227\.(\d+)1$'
 
 teams_pass: 12345Abcde
+
+postfix_config_file: /etc/postfix/main.cf
+postfix_service_state: started
+postfix_service_enabled: true
+postfix_inet_interfaces: localhost
+postfix_inet_protocols: all

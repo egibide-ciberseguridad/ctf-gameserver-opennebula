@@ -13,6 +13,8 @@ RUN ansible-galaxy collection install fausecteam.ctf_gameserver_ansible
 
 RUN apk add py3-requests py3-beautifulsoup4
 
+RUN ansible-galaxy role install geerlingguy.postfix
+
 # Copiar los scripts al contenedor
 COPY --chmod=0755 ../scripts/*.sh /usr/bin/
 
