@@ -31,6 +31,7 @@ build:
 	@docker compose build --pull
 
 init:
+	@docker run --rm -v ./private:/private alpine /bin/sh -c 'touch /private/hosts'
 	@docker compose run --rm terraform-ansible generar_clave.sh
 	@docker compose run --rm terraform-ansible terraform -chdir=/terraform init -upgrade
 
@@ -74,6 +75,7 @@ ssh:
 
 clean:
 	@docker run --rm -v ./private:/private alpine /bin/sh -c 'rm -rf /private/*'
+	@docker run --rm -v ./private:/private alpine /bin/sh -c 'touch /private/hosts'
 	@docker compose down -t 0 -v --remove-orphans
 
 clean-tfstate:
