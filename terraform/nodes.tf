@@ -64,6 +64,7 @@ resource "null_resource" "hosts_nodes" {
 
 resource "null_resource" "ansible_nodes" {
   depends_on = [
+    null_resource.ansible_haproxy,
     null_resource.hosts_nodes
   ]
 

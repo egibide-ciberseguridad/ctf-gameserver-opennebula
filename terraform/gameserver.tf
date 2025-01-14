@@ -58,6 +58,7 @@ resource "null_resource" "hosts_gameserver" {
 
 resource "null_resource" "ansible_gameserver" {
   depends_on = [
+    null_resource.ansible_haproxy,
     null_resource.hosts_gameserver,
     local_file.team-private-key-file
   ]

@@ -58,6 +58,7 @@ resource "null_resource" "hosts_developer" {
 
 resource "null_resource" "ansible_developer" {
   depends_on = [
+    null_resource.ansible_haproxy,
     null_resource.hosts_developer,
     local_file.team-private-key-file
   ]

@@ -62,6 +62,7 @@ resource "null_resource" "hosts_subs" {
 
 resource "null_resource" "ansible_subs" {
   depends_on = [
+    null_resource.ansible_haproxy,
     null_resource.hosts_subs,
     local_file.team-public-key-file
   ]
