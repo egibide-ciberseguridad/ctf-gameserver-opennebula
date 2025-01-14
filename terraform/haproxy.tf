@@ -70,7 +70,7 @@ resource "null_resource" "config_haproxy" {
       haproxy    = local.haproxy,
       gameserver = local.gameserver,
     })
-    destination = "/tmp/haproxy.cfg"
+    destination = "/var/tmp/haproxy.cfg"
   }
 }
 
