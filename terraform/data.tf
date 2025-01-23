@@ -1,10 +1,7 @@
 data "opennebula_templates" "search" {
-  name_regex = ".*"
-  tags = {
-    TAG = local.opennebula.vm.tag
-  }
-  sort_on = "register_date"
-  order   = "ASC" # La más reciente
+  name_regex = local.opennebula.vm.name
+  sort_on    = "register_date"
+  order      = "ASC" # La más reciente
 }
 
 data "opennebula_template" "template" {
@@ -12,12 +9,9 @@ data "opennebula_template" "template" {
 }
 
 data "opennebula_templates" "search_developer" {
-  name_regex = ".*"
-  tags = {
-    TAG = local.opennebula.vm.tag_desktop
-  }
-  sort_on = "register_date"
-  order   = "ASC" # La más reciente
+  name_regex = local.opennebula.vm.name_desktop
+  sort_on    = "register_date"
+  order      = "ASC" # La más reciente
 }
 
 data "opennebula_template" "template_developer" {

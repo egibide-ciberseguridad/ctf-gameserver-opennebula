@@ -6,9 +6,9 @@ locals {
       token    = "4b8cf5....................................................c1cb11"
     }
     vm = {
-      tag         = "debian-terraform"
-      tag_desktop = "debian-terraform-desktop"
-      locked      = false
+      name         = "Debian 12"
+      name_desktop = "Debian 12 Desktop"
+      locked       = false
     }
     limits = {
       gameserver = {
