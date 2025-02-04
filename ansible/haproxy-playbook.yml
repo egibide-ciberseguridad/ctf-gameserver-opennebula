@@ -17,6 +17,8 @@
     haproxy_version: "3.0"  # https://www.haproxy.org
   gather_facts: yes
   become: true
+  roles:
+    - fail2ban
   tasks:
     # Actualizar el sistema
     - import_tasks: common/upgrade-tasks.yml
