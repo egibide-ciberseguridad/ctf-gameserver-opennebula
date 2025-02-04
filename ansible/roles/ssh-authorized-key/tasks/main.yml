@@ -1,0 +1,5 @@
+- name: Autorizar la clave SSH pública del equipo
+  ansible.posix.authorized_key:
+    user: root
+    state: present
+    key: "{{ lookup('file', '/keys/'+team_id+'/id_rsa.pub') }}"
