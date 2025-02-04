@@ -16,13 +16,10 @@
     ansible_python_interpreter: auto_silent
   gather_facts: yes
   become: true
+  roles:
+    - actualizar
+    - docker
   tasks:
-    # Actualizar el sistema
-    - import_tasks: common/upgrade-tasks.yml
-
-    # Instalar Docker
-    - import_tasks: common/docker-tasks.yml
-
     # Configurar SSH
     - name: Autorizar la clave SSH pública del equipo
       ansible.posix.authorized_key:

@@ -18,10 +18,6 @@
   gather_facts: yes
   become: true
   roles:
+    - actualizar
     - fail2ban
-  tasks:
-    # Actualizar el sistema
-    - import_tasks: common/upgrade-tasks.yml
-
-    # Instalar HAProxy
-    - import_tasks: haproxy/haproxy-tasks.yml
+    - haproxy

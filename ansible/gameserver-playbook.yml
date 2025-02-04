@@ -18,10 +18,9 @@
   become: true
   vars_files:
     - gameserver/variables.yml
+  roles:
+    - actualizar
   tasks:
-    # Actualizar el sistema
-    - import_tasks: common/upgrade-tasks.yml
-
     # Construir el paquete .deb del CTF Gameserver
     - import_tasks: gameserver/debian-package-tasks.yml
 
