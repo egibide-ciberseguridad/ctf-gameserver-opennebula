@@ -1,0 +1,11 @@
+- name: Crear el directorio /keys
+  ansible.builtin.file:
+    path: /keys
+    state: directory
+    mode: '0755'
+
+- name: Copiar todas las claves SSH privadas para el checker
+  ansible.builtin.copy:
+    src: /keys/
+    dest: /keys
+    mode: '0444'

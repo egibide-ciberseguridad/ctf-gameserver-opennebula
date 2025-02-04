@@ -1,0 +1,9 @@
+- name: Crear la descarga del fichero id_rsa
+  become_user: postgres
+  shell: psql -d ctf_gameserver -c "INSERT INTO public.registration_teamdownload (filename, description) VALUES ('id_rsa', 'Clave privada SSH.');"
+  ignore_errors: yes
+
+- name: Crear la descarga del fichero id_rsa.pub
+  become_user: postgres
+  shell: psql -d ctf_gameserver -c "INSERT INTO public.registration_teamdownload (filename, description) VALUES ('id_rsa.pub', 'Clave pública SSH.');"
+  ignore_errors: yes

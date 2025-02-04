@@ -1,6 +1,6 @@
 - name: Copiar la utilidad de contraseñas
   ansible.builtin.copy:
-    src: ./gameserver/files/make_password.py
+    src: ./files/make_password.py
     dest: /tmp/make_password.py
 
 - name: Encriptar la contraseña de los equipos

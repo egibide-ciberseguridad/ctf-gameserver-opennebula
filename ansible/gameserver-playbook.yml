@@ -20,66 +20,17 @@
     - gameserver/variables.yml
   roles:
     - actualizar
-  tasks:
-    # Construir el paquete .deb del CTF Gameserver
-    - import_tasks: gameserver/debian-package-tasks.yml
-
-    # Instalar los roles con los diferentes componentes
-    - name: Instalar el rol db_prolog
-      include_role:
-        name: fausecteam.ctf_gameserver_ansible.db_prolog
-    - name: Instalar el rol web
-      include_role:
-        name: fausecteam.ctf_gameserver_ansible.web
-    - name: Instalar el rol db_epilog
-      include_role:
-        name: fausecteam.ctf_gameserver_ansible.db_epilog
-    - name: Instalar el rol controller
-      include_role:
-        name: fausecteam.ctf_gameserver_ansible.controller
-    - name: Instalar el rol submission
-      include_role:
-        name: fausecteam.ctf_gameserver_ansible.submission
-    - name: Instalar el rol checker
-      include_role:
-        name: fausecteam.ctf_gameserver_ansible.checker
-
-    # Configurar el servidor web
-    - import_tasks: gameserver/web-tasks.yml
-
-    # Configurar SSH
-    - name: Crear el directorio /keys
-      ansible.builtin.file:
-        path: /keys
-        state: directory
-        mode: '0755'
-    - name: Copiar todas las claves SSH privadas para el checker
-      ansible.builtin.copy:
-        src: /keys/
-        dest: /keys
-        mode: '0444'
-
-    # Página de inicio
-    - name: Crear una flatpage para la página de inicio
-      become_user: postgres
-      shell: psql -d ctf_gameserver -c "INSERT INTO public.flatpages_flatpage (id, title, content, ordering, slug) VALUES (1, '', 'Welcome to the CTF Gameserver.', 10, '');"
-      ignore_errors: yes
-
-    # Equipos
-    - import_tasks: gameserver/crear-equipos-tasks.yml
+    - debian-package
+    - fausecteam.ctf_gameserver_ansible.db_prolog
+    - fausecteam.ctf_gameserver_ansible.web
+    - fausecteam.ctf_gameserver_ansible.db_epilog
+    - fausecteam.ctf_gameserver_ansible.controller
+    - fausecteam.ctf_gameserver_ansible.submission
+    - fausecteam.ctf_gameserver_ansible.checker
+    - webserver
+    - ssh-keys
+    - homepage
+    - role: crear-equipos
       when: auto_registrar_equipos
-
-    # Descargas
-    - name: Crear la descarga del fichero id_rsa
-      become_user: postgres
-      shell: psql -d ctf_gameserver -c "INSERT INTO public.registration_teamdownload (filename, description) VALUES ('id_rsa', 'Clave privada SSH.');"
-      ignore_errors: yes
-    - name: Crear la descarga del fichero id_rsa.pub
-      become_user: postgres
-      shell: psql -d ctf_gameserver -c "INSERT INTO public.registration_teamdownload (filename, description) VALUES ('id_rsa.pub', 'Clave pública SSH.');"
-      ignore_errors: yes
-
-    # Servidor de correo saliente
-    - name: Instalar postfix
-      include_role:
-        name: geerlingguy.postfix
+    - team-downloads
+    - geerlingguy.postfix
