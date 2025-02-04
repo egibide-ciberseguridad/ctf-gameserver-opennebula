@@ -17,7 +17,7 @@
   gather_facts: yes
   become: true
   vars_files:
-    - gameserver/variables.yml
+    - variables.yml
   roles:
     - actualizar
     - debian-package

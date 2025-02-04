@@ -14,7 +14,8 @@
   hosts: reachable
   vars:
     ansible_python_interpreter: auto_silent
-    haproxy_version: "3.0"  # https://www.haproxy.org
+  vars_files:
+    - variables.yml
   gather_facts: yes
   become: true
   roles:

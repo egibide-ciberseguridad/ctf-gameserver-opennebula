@@ -48,3 +48,5 @@ postfix_inet_interfaces: localhost
 postfix_inet_protocols: all
 
 auto_registrar_equipos: true
+
+haproxy_version: "3.0"

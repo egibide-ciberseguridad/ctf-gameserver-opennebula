@@ -4,8 +4,7 @@ Configuración de [CTF Gameserver](https://github.com/fausecteam/ctf-gameserver)
 
 ## Puesta en marcha
 
-1. Crear y configurar los ficheros `terraform/variables.tf` y `ansible/gameserver/variables.yml` a partir de los de
-   ejemplo.
+1. Crear y configurar los ficheros `terraform/variables.tf` y `ansible/variables.yml` a partir de los de ejemplo.
 2. Desplegar las máquinas virtuales:
 
     ```

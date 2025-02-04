@@ -90,3 +90,5 @@ private/
 ansible/gameserver/variables.yml
 
 services/
+
+ansible/variables.yml
