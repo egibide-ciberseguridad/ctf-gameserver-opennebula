@@ -14,7 +14,7 @@
   hosts: reachable
   vars:
     ansible_python_interpreter: auto_silent
-    haproxy_version: "2.8"  # https://www.haproxy.org
+    haproxy_version: "3.0"  # https://www.haproxy.org
   gather_facts: yes
   become: true
   tasks:
