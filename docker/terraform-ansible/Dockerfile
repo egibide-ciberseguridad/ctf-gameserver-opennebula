@@ -3,7 +3,7 @@ ARG TERRAFORM_VERSION=latest
 FROM hashicorp/terraform:${TERRAFORM_VERSION}
 
 # Instalar los paquetes necesarios
-RUN apk add ansible openssh curl jq make
+RUN apk add ansible openssh curl jq make nano
 
 RUN apk add bash bash-completion shadow && \
     chsh root --shell /bin/bash && \
