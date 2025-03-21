@@ -1,0 +1,22 @@
+---
+- name: Comprobar los hosts disponibles
+  hosts: all
+  gather_facts: no
+  tasks:
+    - command: timeout 20 sh -c 'until nc -z $0 $1; do sleep 1; done' {{ inventory_hostname }} 22
+      delegate_to: localhost
+      register: ping_result
+      ignore_errors: yes
+    - group_by: key=reachable
+      when: ping_result is success
+
+- name: Configurar el acceso remoto por SSH para los equipos
+  hosts: reachable
+  vars:
+    ansible_python_interpreter: auto_silent
+  vars_files:
+    - variables.yml
+  gather_facts: yes
+  become: true
+  roles:
+    - ssh-tunnels

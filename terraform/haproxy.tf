@@ -95,6 +95,25 @@ resource "null_resource" "ansible_haproxy" {
   }
 }
 
+resource "null_resource" "ansible_ssh_tunnel" {
+  depends_on = [
+    null_resource.ansible_gameserver,
+  ]
+
+  provisioner "local-exec" {
+    quiet   = true
+    command = <<EOT
+      ANSIBLE_HOST_KEY_CHECKING=False \
+      ANSIBLE_FORCE_COLOR=True \
+      ansible-playbook \
+        -i "${local.haproxy.connection_ip}," \
+        --extra-vars "node_ip=${local.haproxy.private_ip}" \
+        --extra-vars "teams=${var.nodes}" \
+        /ansible/ssh-tunnel-playbook.yml
+    EOT
+  }
+}
+
 locals {
   haproxy = {
     name          = opennebula_virtual_machine.haproxy.name

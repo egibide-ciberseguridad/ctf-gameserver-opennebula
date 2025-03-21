@@ -33,6 +33,14 @@ Configuración de [CTF Gameserver](https://github.com/fausecteam/ctf-gameserver)
 
 ![](docs/diagrama.png)
 
+## Túnel para acceso remoto de los equipos por SSH
+
+```shell
+ssh -i ./id_rsa \
+    -o ProxyCommand="ssh -i ./id_rsa -p 22 -W %h:%p team-1@tunnel-ctf.arriaga.eu" \
+    root@ctf-team-1
+```
+
 ## Referencias
 
 - [Installation - CTF Gameserver](https://ctf-gameserver.org/installation/)
