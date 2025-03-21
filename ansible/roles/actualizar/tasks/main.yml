@@ -25,10 +25,3 @@
 - name: Eliminar dependencias obsoletas
   ansible.builtin.apt:
     autoremove: yes
-
-- name: Activar las actualizaciones automáticas
-  debconf:
-    name: unattended-upgrades
-    question: unattended-upgrades/enable_auto_updates
-    vtype: boolean
-    value: true
