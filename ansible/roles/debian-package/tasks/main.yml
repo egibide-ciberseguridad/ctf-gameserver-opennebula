@@ -17,7 +17,7 @@
   ansible.builtin.git:
     repo: "{{ gameserver_git_repo_url }}"
     dest: /tmp/build/ctf-gameserver
-    version: master
+    version: "{{ gameserver_git_repo_branch }}"
 
 - name: Construir el paquete .deb
   ansible.builtin.shell: |
