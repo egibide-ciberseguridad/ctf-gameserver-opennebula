@@ -5,14 +5,20 @@ services:
       dockerfile: terraform-ansible/Dockerfile
       args:
         - TERRAFORM_VERSION=${TERRAFORM_VERSION}
-    hostname: terraform-ansible
+    hostname: ctf-workspace
     environment:
       - TF_VAR_SSH_PUBLIC_KEY=${SSH_PUBLIC_KEY}
+    env_file:
+      - ./.env
     volumes:
       - ./terraform:/terraform
       - ./ansible:/ansible
+      - homedir:/root
       - ./private/ssh:/root/.ssh
       - ./private/keys:/keys
       - ./private/certs:/certs
       - ./services:/services
       - ./private/hosts:/etc/hosts
+
+volumes:
+  homedir:

@@ -10,13 +10,3 @@ terraform {
     }
   }
 }
-
-provider "opennebula" {
-  endpoint = "https://opennebula.egibide.org/RPC2"
-  username = local.opennebula.connection.username
-  password = local.opennebula.connection.token
-}
-
-provider "cloudflare" {
-  api_token = local.cloudflare.token
-}

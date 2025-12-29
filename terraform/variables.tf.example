@@ -1,10 +1,5 @@
 locals {
   opennebula = {
-    connection = {
-      username = "ctf"
-      group    = "ctf"
-      token    = "4b8cf5....................................................c1cb11"
-    }
     vm = {
       name         = "Debian 12"
       name_desktop = "Debian 12 Desktop"
@@ -50,7 +45,6 @@ locals {
     connect_to_public_ip = false
   }
   cloudflare = {
-    token   = "ECwU...bzxx"
     zone_id = "5273...001b"
     subdomain  = "ctf"
   }
