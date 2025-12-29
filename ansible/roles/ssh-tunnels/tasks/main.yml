@@ -1,3 +1,4 @@
+---
 - name: Crear el usuario del equipo en el haproxy
   ansible.builtin.user:
     name: "team-{{ item }}"
@@ -5,7 +6,7 @@
   with_sequence: start=1 end="{{ teams }}"
 
 - name: Crear el directorio .ssh del usuario
-  file:
+  ansible.builtin.file:
     path: "/home/team-{{ item }}/.ssh"
     state: directory
     owner: "team-{{ item }}"
@@ -16,5 +17,5 @@
     src: "/keys/{{ item }}/id_rsa.pub"
     dest: "/home/team-{{ item }}/.ssh/authorized_keys"
     owner: "team-{{ item }}"
-    mode: '0400'
+    mode: "0400"
   with_sequence: start=1 end="{{ teams }}"

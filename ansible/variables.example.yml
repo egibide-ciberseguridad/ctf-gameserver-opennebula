@@ -1,3 +1,4 @@
+---
 ctf_gameserver_downloadpath: /tmp
 ctf_gameserver_db_host: localhost
 
@@ -38,7 +39,7 @@ gameserver_git_repo_branch: master
 
 ctf_gameserver_submission_listen_host: ctf-gameserver
 ctf_gameserver_submission_listen_ports: 6666
-ctf_gameserver_submission_team_regex: '^172\.20\.227\.(\d+)1$'
+ctf_gameserver_submission_team_regex: "^172\\.20\\.227\\.(\\d+)1$"
 
 teams_pass: 12345Abcde
 

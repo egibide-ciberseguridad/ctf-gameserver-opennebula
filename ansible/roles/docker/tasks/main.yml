@@ -1,3 +1,4 @@
+---
 - name: Descargar la clave de firma de paquetes de Docker
   ansible.builtin.get_url:
     url: https://download.docker.com/linux/debian/gpg
@@ -24,7 +25,7 @@
   ansible.builtin.service:
     name: docker
     state: started
-    enabled: yes
+    enabled: true
 
 - name: Parche para que containerd arranque correctamente
   ansible.builtin.shell: |
@@ -34,5 +35,5 @@
 - name: Reiniciar containerd
   ansible.builtin.service:
     name: containerd
-    daemon_reload: yes
+    daemon_reload: true
     state: restarted

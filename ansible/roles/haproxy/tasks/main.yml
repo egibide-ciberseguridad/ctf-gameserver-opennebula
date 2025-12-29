@@ -1,25 +1,26 @@
+---
 - name: Descargar la clave de firma de paquetes de HAProxy
-  get_url:
+  ansible.builtin.get_url:
     url: https://haproxy.debian.net/bernat.debian.org.gpg
     dest: /usr/share/keyrings/haproxy.debian.net.asc
 
 - name: Obtener la arquitectura del sistema
-  shell: dpkg --print-architecture
+  ansible.builtin.shell: dpkg --print-architecture
   register: debian_arch
 
 - name: Añadir el repositorio apt para la versión estable
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb [arch={{ debian_arch.stdout }} signed-by=/usr/share/keyrings/haproxy.debian.net.asc] https://haproxy.debian.net {{ ansible_distribution_release }}-backports-{{ haproxy_version }} main
     state: present
 
 - name: Instalar HAProxy
-  apt:
+  ansible.builtin.apt:
     name:
       - haproxy={{ haproxy_version }}.*
     state: present
 
 - name: Usar el comando setcap para permitir a HAProxy utilizar los puertos 80 y 443
-  command: setcap cap_net_bind_service=+ep /usr/sbin/haproxy
+  ansible.builtin.command: setcap cap_net_bind_service=+ep /usr/sbin/haproxy
 
 - name: Instalar el certificado autofirmado
   ansible.builtin.copy:
@@ -27,10 +28,10 @@
     dest: /etc/ssl/private/server.pem
 
 - name: Sobreescribir el fichero de configuración
-  command: mv /var/tmp/haproxy.cfg /etc/haproxy/haproxy.cfg
+  ansible.builtin.command: mv /var/tmp/haproxy.cfg /etc/haproxy/haproxy.cfg
 
 - name: Reiniciar el servicio HAProxy
-  service:
+  ansible.builtin.service:
     name: haproxy
     state: restarted
-    enabled: yes
+    enabled: true

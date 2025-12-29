@@ -1,5 +1,6 @@
+---
 - name: Instalar dependencias
-  apt:
+  ansible.builtin.apt:
     name:
       - python3-configargparse
     state: present
@@ -13,7 +14,7 @@
   ansible.builtin.copy:
     src: ./files/ctf-team-submission
     dest: /usr/bin/ctf-team-submission
-    mode: '0755'
+    mode: "0755"
 
 - name: Crear el directorio de configuración del servicio
   ansible.builtin.file:
@@ -33,6 +34,6 @@
 - name: Arrancar el servicio de envío
   ansible.builtin.systemd_service:
     state: started
-    enabled: yes
-    daemon_reload: yes
+    enabled: true
+    daemon_reload: true
     name: submission.service
