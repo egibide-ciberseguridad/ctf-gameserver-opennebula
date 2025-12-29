@@ -38,7 +38,7 @@ resource "opennebula_virtual_machine" "developer" {
   }
 }
 
-resource "null_resource" "hosts_developer" {
+resource "terraform_data" "hosts_developer" {
   depends_on = [
     opennebula_virtual_machine.developer
   ]
@@ -56,10 +56,10 @@ resource "null_resource" "hosts_developer" {
   }
 }
 
-resource "null_resource" "ansible_developer" {
+resource "terraform_data" "ansible_developer" {
   depends_on = [
-    null_resource.ansible_haproxy,
-    null_resource.hosts_developer,
+    terraform_data.ansible_haproxy,
+    terraform_data.hosts_developer,
     local_file.team-private-key-file
   ]
 

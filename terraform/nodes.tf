@@ -40,7 +40,7 @@ resource "opennebula_virtual_machine" "nodes" {
   }
 }
 
-resource "null_resource" "hosts_nodes" {
+resource "terraform_data" "hosts_nodes" {
   depends_on = [
     opennebula_virtual_machine.nodes,
     local_file.team-private-key-file,
@@ -62,10 +62,10 @@ resource "null_resource" "hosts_nodes" {
   }
 }
 
-resource "null_resource" "ansible_nodes" {
+resource "terraform_data" "ansible_nodes" {
   depends_on = [
-    null_resource.ansible_haproxy,
-    null_resource.hosts_nodes
+    terraform_data.ansible_haproxy,
+    terraform_data.hosts_nodes
   ]
 
   count = var.nodes

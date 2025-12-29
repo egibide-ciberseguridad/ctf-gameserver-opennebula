@@ -40,7 +40,7 @@ resource "opennebula_virtual_machine" "subs" {
   }
 }
 
-resource "null_resource" "hosts_subs" {
+resource "terraform_data" "hosts_subs" {
   depends_on = [
     opennebula_virtual_machine.subs
   ]
@@ -60,10 +60,10 @@ resource "null_resource" "hosts_subs" {
   }
 }
 
-resource "null_resource" "ansible_subs" {
+resource "terraform_data" "ansible_subs" {
   depends_on = [
-    null_resource.ansible_haproxy,
-    null_resource.hosts_subs,
+    terraform_data.ansible_haproxy,
+    terraform_data.hosts_subs,
     local_file.team-public-key-file
   ]
 

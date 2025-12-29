@@ -39,19 +39,19 @@ plan:
 	@docker compose run --rm terraform-ansible terraform -chdir=/terraform plan
 
 provision-gameserver:
-	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="null_resource.ansible_gameserver"
+	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="terraform_data.ansible_gameserver"
 
 provision-node:
-	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="null_resource.ansible_nodes[0]"
+	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="terraform_data.ansible_nodes[0]"
 
 hosts:
-	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="null_resource.hosts_gameserver" -replace="null_resource.hosts_haproxy"	-replace="null_resource.hosts_nodes[0]"
+	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="terraform_data.hosts_gameserver" -replace="terraform_data.hosts_haproxy"	-replace="terraform_data.hosts_nodes[0]"
 
 provision-sub:
-	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="null_resource.ansible_subs[0]"
+	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="terraform_data.ansible_subs[0]"
 
 provision-haproxy:
-	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="null_resource.ansible_haproxy"
+	@docker compose run --rm terraform-ansible terraform -chdir=/terraform apply -auto-approve -replace="terraform_data.ansible_haproxy"
 
 apply:
 	@docker compose run --rm terraform-ansible time -f "Tiempo total: %E" terraform -chdir=/terraform apply -auto-approve

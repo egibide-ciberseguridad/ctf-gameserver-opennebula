@@ -37,7 +37,7 @@ resource "opennebula_virtual_machine" "haproxy" {
   }
 }
 
-resource "null_resource" "hosts_haproxy" {
+resource "terraform_data" "hosts_haproxy" {
   depends_on = [
     opennebula_virtual_machine.haproxy
   ]
@@ -54,7 +54,7 @@ resource "null_resource" "hosts_haproxy" {
   }
 }
 
-resource "null_resource" "config_haproxy" {
+resource "terraform_data" "config_haproxy" {
   depends_on = [
     opennebula_virtual_machine.haproxy
   ]
@@ -74,10 +74,10 @@ resource "null_resource" "config_haproxy" {
   }
 }
 
-resource "null_resource" "ansible_haproxy" {
+resource "terraform_data" "ansible_haproxy" {
   depends_on = [
-    null_resource.hosts_haproxy,
-    null_resource.config_haproxy,
+    terraform_data.hosts_haproxy,
+    terraform_data.config_haproxy,
     local_file.haproxy-cert-file,
   ]
 
@@ -95,9 +95,9 @@ resource "null_resource" "ansible_haproxy" {
   }
 }
 
-resource "null_resource" "ansible_ssh_tunnel" {
+resource "terraform_data" "ansible_ssh_tunnel" {
   depends_on = [
-    null_resource.ansible_gameserver,
+    terraform_data.ansible_gameserver,
   ]
 
   provisioner "local-exec" {
